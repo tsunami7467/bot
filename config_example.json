@@ -2,5 +2,6 @@
   "token": "",
   "rclone_config_name": "",
   "rclone_folder_name": "",
-  "targetchannelid": ""
+  "targetchannelid": "",
+  "publiclink": ""
 }
