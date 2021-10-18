@@ -1,3 +1,4 @@
+# Made By Leho | github.com/lehoooo | leho.dev
 import json
 import sys
 from os.path import exists
@@ -68,6 +69,7 @@ async def on_message(message):
 
 
                 print("downloading file now")
+                await channelreply.send("Photo detected! Starting Backup!", delete_after=5)
 
                 file = requests.get(str(link))
                 print("file downloaded")
@@ -77,10 +79,14 @@ async def on_message(message):
                     try:
                         os.system("rclone.exe copy " + str(finalfolderpath) + "/" + str(messageid) + ".jpg " + str(rclone_config_name) + ":" + str(rclone_folder_name) + "/")
                         print("Uploaded Successfully!")
-                        await channelreply.send("Uploaded Successfully!", delete_after=5)
+                        embed = discord.Embed(title="Uploaded Successfully!")
+                        embed.add_field(name="File Name:", value=str(messageid) + ".jpg/.png", inline=False)
+                        embed.add_field(name="Link:", value=str(config['publiclink']), inline=False)
+                        embed.set_footer(text="BackupBot | Made With 💖 By Leho")
+                        await channelreply.send(embed=embed, delete_after=20)
                     except Exception as e:
                         print("Error! ", e)
-                        await channelreply.send("Error!" + str(e))
+                        await channelreply.send("Error! " + str(e))
 
 
                 else:
